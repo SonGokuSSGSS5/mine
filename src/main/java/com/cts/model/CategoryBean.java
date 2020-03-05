@@ -31,20 +31,13 @@ public class CategoryBean implements Serializable {
 
 	public void setCategory(String category) {
 		this.category = category;
-	}
-
-	public CategoryBean(Integer categoryId, String category) {
-		super();
-		this.categoryId = categoryId;
-		this.category = category;
+		
 	}
 
 	public CategoryBean() {
-		super();
+		
 	}
 	
-	
-
 	
 
 }

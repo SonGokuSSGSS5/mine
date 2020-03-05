@@ -13,9 +13,9 @@
 
 <f:form action="result" method="post" modelAttribute="category">
 	
-	Enter a category ID <f:input path="categoryId" name="categoryId"/>
+	Enter a category ID <f:input path="categoryId" />
 	<br><br>
-	Enter a category <f:input path="category" name="category"/>
+	Enter a category <f:input path="category"/>
 	
 		<input type="submit" value="Add Category">
 

@@ -3,6 +3,8 @@ package com.cts.controllers;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +33,7 @@ public class CategoryController {
 		
 		System.out.println("Category ID : Category Name");
 		for(CategoryBean cb:opt){
-			System.out.println(cb.getCategoryId());
+			System.out.println("\n" + cb.getCategoryId());
 			System.out.print(" === " + cb.getCategory());
 		}
 		
@@ -56,19 +58,21 @@ public class CategoryController {
 		
 		CategoryBean category=opt.get();
 		
-		m.addAttribute("login", new CategoryBean());
+//		m.addAttribute("login", new CategoryBean());
 		
 		m.addAttribute("course", category);
+		m.addAttribute("category", category);
 		
 		return "updateCategoryPage";
 		
 	}
 	
 	@PostMapping("/updateCategory")
-	public String updateCourse(@ModelAttribute("category") CategoryBean category,BindingResult br) {
+	public String updateCourse(CategoryBean cat,BindingResult br,Model m) {
 		
+		m.addAttribute("category", cat);
 		
-		cdao.save(category);
+		cdao.save(cat);
 		
 		return "updateSuccess";
 		
@@ -76,14 +80,14 @@ public class CategoryController {
 	
 	
 	
-	@RequestMapping(value="/result",method=RequestMethod.POST)
-	public String addtoDB(@ModelAttribute("category")CategoryBean category,Model m) {
-		System.out.println(category.getCategory());
-		System.out.println(category.getCategoryId());
+	@PostMapping("/result")
+	public String addtoDB(CategoryBean cat,Model m) {
 		
-//		CategoryBean cb = new CategoryBean(categoryId,category);
-		cdao.save(category);
-		m.addAttribute("category", category);
+		m.addAttribute("category", cat);
+		
+		
+		cdao.save(cat);
+		
 		return "result";
 	}
 }
